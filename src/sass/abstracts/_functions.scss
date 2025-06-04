@@ -1,0 +1,31 @@
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "breakpoints" as *;
+@use "colors" as *;
+
+@function validate-breakpoint($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @return map.get($breakpoints, $breakpoint);
+  } @else {
+    @if meta.type-of($breakpoint) == number and math.is-unitless($breakpoint) {
+      @error "The number you entered |'#{$breakpoint}'| is unitless";
+    } @else if
+      meta.type-of($breakpoint) ==
+      number and not
+      math.is-unitless($breakpoint)
+    {
+      @return $breakpoint;
+    } @else {
+      @error "The breakpoint you entered |`#{$breakpoint}`| is not exist in the breakpoints map, the breakpoints are : #{map.keys($breakpoints)}";
+    }
+  }
+}
+
+@function clr($colors, $color) {
+  @if map.has-key($colors, $color) {
+    @return map.get($colors, $color);
+  } @else {
+    @error "This Color '#{$color} is not available'";
+  }
+}

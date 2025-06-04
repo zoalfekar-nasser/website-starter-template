@@ -1,0 +1,8 @@
+@use "../abstracts/" as *;
+
+
+@each $fs-name, $fs-value in $font-sizes {
+  .fs-#{$fs-name} {
+    font-size: $fs-value;
+  }
+}

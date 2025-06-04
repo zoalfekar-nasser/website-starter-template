@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "../abstracts/" as *;
+
+:root {
+  --ff-primary: #{$ff-primary};
+  --fs-base: #{map.get($font-sizes, base)};
+  --fw-400: #{$fw-400};
+
+  @each $color-name, $color-value in $colors {
+    --clr-#{$color-name}: #{$color-value};
+  }
+
+}

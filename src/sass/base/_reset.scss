@@ -1,0 +1,17 @@
+:where(*, ::before, ::after) {
+  box-sizing: border-box;
+}
+
+:where(ul[class]) {
+  padding: 0;
+  list-style: none;
+}
+
+:where(h1, h2, h3, h4, p, body) {
+  margin: 0;
+}
+
+:where(input, button) {
+  font-family: inherit;
+  font-size: inherit;
+}

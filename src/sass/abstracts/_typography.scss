@@ -1,0 +1,11 @@
+$font-sizes: (
+  base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem),
+  medium: clamp(1.125rem, 1.05rem + 0.375vw, 1.5rem),
+  large: clamp(1.2656rem, 1.1588rem + 0.5344vw, 1.8rem),
+  xl: clamp(1.4238rem, 1.2766rem + 0.7362vw, 2.16rem),
+  xxl: clamp(1.6018rem, 1.4038rem + 0.9902vw, 2.592rem),
+);
+
+$ff-primary: system-ui;
+$fw-400: 400;
+
