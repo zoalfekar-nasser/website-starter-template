@@ -15,6 +15,14 @@
   border: none;
 }
 
+:where(img) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(a) {
+  display: inline-block;
+}
 
 :where(input, button) {
   font-family: inherit;
