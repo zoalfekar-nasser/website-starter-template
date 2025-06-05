@@ -3,7 +3,7 @@
 
 :root {
   --ff-primary: #{$ff-primary};
-  --fs-base: #{map.get($font-sizes, base)};
+  --fs-base: #{fs(base)};
   --fw-400: #{$fw-400};
 
   @each $color-name, $color-shades in $colors {
