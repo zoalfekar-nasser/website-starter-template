@@ -1,0 +1,17 @@
+.text-center {
+  text-align: center;
+}
+
+.flow > * + * {
+  margin-top: var(--flow-spacer, $space-base);
+
+  &[data-spacing="small"] {
+    --flow-spacer: $space-s;
+  }
+  &[data-spacing="medium"] {
+    --flow-spacer: $space-m;
+  }
+  &[data-spacing="large"] {
+    --flow-spacer: $space-l;
+  }
+}

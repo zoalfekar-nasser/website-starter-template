@@ -1,0 +1,8 @@
+@use "../base/" as *;
+@use "../abstracts/" as *;
+
+.wrapper {
+  width: min(--wrapper-size, var(--main-wrapper-size, 25rem));
+  padding-inline: $space-base;
+  margin-inline: auto;
+}
