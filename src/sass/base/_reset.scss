@@ -11,6 +11,11 @@
   margin: 0;
 }
 
+:where(button) {
+  border: none;
+}
+
+
 :where(input, button) {
   font-family: inherit;
   font-size: inherit;

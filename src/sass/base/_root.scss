@@ -6,8 +6,9 @@
   --fs-base: #{map.get($font-sizes, base)};
   --fw-400: #{$fw-400};
 
-  @each $color-name, $color-value in $colors {
-    --clr-#{$color-name}: #{$color-value};
+  @each $color-name, $color-shades in $colors {
+    @each $color-shade, $color-value in $color-shades {
+      --clr-#{$color-name}-#{$color-shade}: #{$color-value};
+    }
   }
-
 }

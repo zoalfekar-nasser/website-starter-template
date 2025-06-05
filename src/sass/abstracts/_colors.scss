@@ -1,6 +1,9 @@
 $colors: (
-
-  primary: #234,
-  secondary: #145,
-
-)
+  primary: (
+    "400": darkred,
+  ),
+  neutral: (
+    "100": #ffffff,
+    "900": #123,
+  ),
+);
