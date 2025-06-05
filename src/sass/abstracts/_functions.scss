@@ -2,7 +2,7 @@
 @use "sass:meta";
 @use "sass:math";
 @use "breakpoints" as *;
-@use "colors" as *;
+@use "typography" as *;
 
 @function validate-breakpoint($breakpoint) {
   @if map.has-key($breakpoints, $breakpoint) {
@@ -22,10 +22,10 @@
   }
 }
 
-@function clr($colors, $color) {
-  @if map.has-key($colors, $color) {
-    @return map.get($colors, $color);
+@function fs($font-sizes, $font-size) {
+  @if map.has-key($font-sizes, $font-size) {
+    @return map.get($font-sizes, $font-size);
   } @else {
-    @error "This Color '#{$color} is not available'";
+    @error "This font-size '#{$font-size} is not available'";
   }
 }
