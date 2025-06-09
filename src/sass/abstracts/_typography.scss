@@ -1,11 +1,15 @@
 $font-sizes: (
+  s: clamp(0.8889rem, 0.8667rem + 0.1111vw, 1rem),
   base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem),
-  medium: clamp(1.125rem, 1.05rem + 0.375vw, 1.5rem),
-  large: clamp(1.2656rem, 1.1588rem + 0.5344vw, 1.8rem),
+  m: clamp(1.125rem, 1.05rem + 0.375vw, 1.5rem),
+  l: clamp(1.2656rem, 1.1588rem + 0.5344vw, 1.8rem),
   xl: clamp(1.4238rem, 1.2766rem + 0.7362vw, 2.16rem),
   xxl: clamp(1.6018rem, 1.4038rem + 0.9902vw, 2.592rem),
+  xxxl: clamp(2.0736rem, 1.0961rem + 4.8873vw, 3.9609rem),
 );
 
-$ff-primary: system-ui;
+$ff-primary: "Lato", sans-serif;
+$ff-secondary: "Abril Fatface", serif;
 $fw-400: 400;
-
+$fw-700: 700;
+$fw-900: 900;
