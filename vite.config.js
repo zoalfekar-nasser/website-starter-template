@@ -1,37 +1,58 @@
-// Import necessary functions and plugins
+// vite.config.js
+
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import htmlPurge from "vite-plugin-purgecss"; // Your plugin import
+import htmlPurge from "vite-plugin-purgecss";
+import stylelint from "vite-plugin-stylelint";
+import { createHtmlPlugin } from "vite-plugin-html";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
-// Export a single configuration object, processed by defineConfig
 export default defineConfig({
-  // Root directory where your source files are located (e.g., 'src')
+  // Specifies the project root. Essential for Vite to understand the folder structure.
   root: resolve(__dirname, "src/"),
 
-  // Build options
+  // Specifies the server base. '/' means the server starts at the project root.
+  // This is crucial for resolving paths correctly in both dev and prod.
+  base: "/",
+
+  // Build-specific options.
   build: {
-    outDir: "../dist", // Output directory for built files
-    emptyOutDir: true, // Clear the output directory before building
+    // The output directory for the final production files.
+    outDir: "../dist",
+    // Clears the output directory before each build. Good practice.
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        // Entry points for your HTML files (Vite builds them as separate pages)
+        // Defines the entry point of the application.
         home: resolve(__dirname, "src/index.html"),
+
         about: resolve(__dirname, "src/about/index.html"),
         contact: resolve(__dirname, "src/contact/index.html"),
       },
     },
   },
 
-  // ✨ THIS IS WHERE YOUR PLUGINS GO ✨
-  // The 'plugins' array is a property of the main Vite config object.
+  // The plugins array.
+
   plugins: [
     htmlPurge({
-      // You can add options for purgecss here if needed.
-      // For example, to tell it where to look for content:
-      content: [
-        resolve(__dirname, "src/**/*.html"), // Look in all HTML files
-        resolve(__dirname, "src/**/*.js"), // Look in JS files (if you have dynamic classes)
-      ],
+      paths: ["./src/**/*.{html,js,vue,jsx,tsx}"],
+      safelist: {
+        // Or use greedy matching for more comprehensive coverage
+        greedy: [/where/],
+      },
     }),
+
+    createHtmlPlugin({
+      minify: true,
+    }),
+
+    ViteImageOptimizer({
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+    }),
+
+    stylelint({ fix: true }),
   ],
 });
