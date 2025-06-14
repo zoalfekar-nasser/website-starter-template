@@ -3,6 +3,7 @@
 @use "sass:math";
 @use "breakpoints" as *;
 @use "typography" as *;
+@use "spacing" as *;
 
 @function validate-breakpoint($breakpoint) {
   @if map.has-key($breakpoints, $breakpoint) {
@@ -22,10 +23,18 @@
   }
 }
 
-@function fs($font-size) {
-  @if map.has-key($font-sizes, $font-size) {
-    @return map.get($font-sizes, $font-size);
+@function getMapValue($map, $key, $name: "Value") {
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
   } @else {
-    @error "This font-size '#{$font-size} is not available'";
+    @error "This #{$name} '#{$key}' is not available  ";
   }
+}
+
+@function fs($font-size) {
+  @return getMapValue($font-sizes, $font-size, "font-size");
+}
+
+@function space($space) {
+  @return getMapValue($spaces, $space, "space");
 }

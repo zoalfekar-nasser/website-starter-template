@@ -3,10 +3,10 @@
 
 .wrapper {
   width: min(var(--wrapper-size, var(--main-wrapper-size, 25rem)), 100%);
-  padding-inline: $space-base;
+  padding-inline: space(base);
   margin-inline: auto;
 
-  &[data-type='extended'] {
+  &[data-type="extended"] {
     --wrapper-size: 1440px;
   }
 }

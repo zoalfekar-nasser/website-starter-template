@@ -1,3 +1,4 @@
+/*! purgecss start ignore */
 :where(*, ::before, ::after) {
   box-sizing: border-box;
 }
@@ -13,9 +14,10 @@
 
 :where(button) {
   border: none;
+  cursor: pointer;
 }
 
-:where(img) {
+:where(img,picture) {
   display: block;
   max-width: 100%;
 }
@@ -28,3 +30,4 @@
   font-family: inherit;
   font-size: inherit;
 }
+/*! purgecss end ignore */

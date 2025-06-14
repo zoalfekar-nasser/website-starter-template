@@ -1,0 +1,7 @@
+@use "spacing" as *;
+@use "functions" as *;
+
+%flex {
+  display: flex;
+  gap: var(--gap, space(base));
+}
