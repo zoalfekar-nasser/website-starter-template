@@ -9,7 +9,7 @@
 }
 
 .section-padding {
-  padding-block: var(--section-padding);
+  padding-block: var(--main-section-padding, --section-padding);
 }
 
 .normal-text {

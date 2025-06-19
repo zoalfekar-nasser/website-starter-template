@@ -1,0 +1,367 @@
+I will give you my website starter template to review it, (assuming that for now im using only HTML, and Sass),
+Please Make a full review for the template, do you find it a professional template , give me recommendations to be as pro as possible
+
+The General Structure:
+--node-modules
+--public
+--src
+      --about
+          --index.html
+      --contact
+          --index.html
+      --sass
+          --abstracts
+              _breakpoints.scss
+              _colors.scss
+              _functions.scss
+              _index.scss
+              _mixins.scss
+              _spacing.scss
+              _typography.scss
+          --base
+              _general.scss
+              _index.scss
+              _reset.scss
+              _root.scss
+          --components
+              _buttons.scss
+              _navigation.scss
+              _forms.scss
+              _index.scss
+          --layout
+              _footer.scss
+              _grid.scss
+              _header.scss
+              _index.scss
+              _sidebar.scss
+              _wrapper.scss
+          --pages
+              _about.scss
+              _contact.scss
+              _home.scss
+          --utilities
+              _font-sizes.scss
+              _helpers.scss
+              _index.scss
+          --style.scss
+      --index.html
+--.gitignore
+--package-lock.json
+--package.json
+--vite.config.js
+
+Now i will give you my sass files content, of course for now i will have empty files, and you know why of course, because this is a template,
+
+_breakpoints:
+
+$breakpoints: (
+  small: 30em,
+  medium: 45em,
+  large: 65em,
+  xl: 80em
+);
+
+_colors:
+
+$colors: (
+  primary: (
+    "400": darkred,
+  ),
+  neutral: (
+    "100": #ffffff,
+    "900": #123,
+  ),
+);
+
+_functions:
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "breakpoints" as *;
+@use "typography" as *;
+
+@function validate-breakpoint($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @return map.get($breakpoints, $breakpoint);
+  } @else {
+    @if meta.type-of($breakpoint) == number and math.is-unitless($breakpoint) {
+      @error "The number you entered |'#{$breakpoint}'| is unitless";
+    } @else if
+      meta.type-of($breakpoint) ==
+      number and not
+      math.is-unitless($breakpoint)
+    {
+      @return $breakpoint;
+    } @else {
+      @error "The breakpoint you entered |`#{$breakpoint}`| is not exist in the breakpoints map, the breakpoints are : #{map.keys($breakpoints)}";
+    }
+  }
+}
+
+@function fs($font-size) {
+  @if map.has-key($font-sizes, $font-size) {
+    @return map.get($font-sizes, $font-size);
+  } @else {
+    @error "This font-size '#{$font-size} is not available'";
+  }
+}
+
+_index:
+@forward "./breakpoints";
+@forward "./functions";
+@forward "./mixins";
+@forward "./spacing";
+@forward "./typography";
+@forward "./colors";
+
+_mixins:
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "breakpoints" as *;
+@use "functions" as *;
+
+@mixin media-min($min-breakpoint) {
+  $breakpoint: validate-breakpoint($min-breakpoint);
+
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-max($max-breakpoint) {
+  $breakpoint: validate-breakpoint($max-breakpoint);
+
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-range($min-breakpoint, $max-breakpoint) {
+  $min-breakpoint: validate-breakpoint($min-breakpoint);
+  $max-breakpoint: validate-breakpoint($max-breakpoint);
+
+  @media (min-width: $min-breakpoint) and (max-width: $max-breakpoint) {
+    @content;
+  }
+}
+
+
+_spacing:
+$space-2xs: clamp(0.25rem, 0.2375rem + 0.0625vw, 0.3125rem);
+$space-xs: clamp(0.5rem, 0.475rem + 0.125vw, 0.625rem);
+$space-s: clamp(0.75rem, 0.7125rem + 0.1875vw, 0.9375rem);
+$space-base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+$space-m: clamp(1.5rem, 1.425rem + 0.375vw, 1.875rem);
+$space-l: clamp(2rem, 1.9rem + 0.5vw, 2.5rem);
+$space-xl: clamp(3rem, 2.85rem + 0.75vw, 3.75rem);
+$space-2xl: clamp(4rem, 3.8rem + 1vw, 5rem);
+
+
+_typography:
+$font-sizes: (
+  base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem),
+  medium: clamp(1.125rem, 1.05rem + 0.375vw, 1.5rem),
+  large: clamp(1.2656rem, 1.1588rem + 0.5344vw, 1.8rem),
+  xl: clamp(1.4238rem, 1.2766rem + 0.7362vw, 2.16rem),
+  xxl: clamp(1.6018rem, 1.4038rem + 0.9902vw, 2.592rem),
+);
+
+$ff-primary: system-ui;
+$fw-400: 400;
+
+_general:
+@use "../abstracts/" as *;
+
+:where(body) {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-400);
+}
+
+_reset:
+:where(*, ::before, ::after) {
+  box-sizing: border-box;
+}
+
+:where(ul[class]) {
+  padding: 0;
+  list-style: none;
+}
+
+:where(h1, h2, h3, h4, p, body) {
+  margin: 0;
+}
+
+:where(button) {
+  border: none;
+}
+
+
+:where(input, button) {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+_root:
+@use "sass:map";
+@use "../abstracts/" as *;
+
+:root {
+  --ff-primary: #{$ff-primary};
+  --fs-base: #{fs(base)};
+  --fw-400: #{$fw-400};
+
+  @each $color-name, $color-shades in $colors {
+    @each $color-shade, $color-value in $color-shades {
+      --clr-#{$color-name}-#{$color-shade}: #{$color-value};
+    }
+  }
+}
+
+
+_index:
+
+@forward "./root";
+@forward "./reset";
+@forward "./general";
+
+
+_buttons:
+nothing right now
+
+_forms:
+nothing right now
+
+_navigation:
+nothing right now
+
+_index:
+@forward "./buttons";
+@forward "./forms";
+@forward "./navigation";
+
+
+_footer:
+nothing right now
+
+_grid:
+nothing right now
+
+_header:
+nothing right now
+
+_sidebar:
+nothing right now
+
+_wrapper:
+
+@use "../base/" as *;
+@use "../abstracts/" as *;
+
+.wrapper {
+  width: min(--wrapper-size, var(--main-wrapper-size, 25rem));
+  padding-inline: $space-base;
+  margin-inline: auto;
+}
+
+
+_index:
+@forward "./grid";
+@forward "./header";
+@forward "./footer";
+@forward "./sidebar";
+@forward "./wrapper";
+
+_font-sizes:
+
+@use "../abstracts/" as *;
+
+
+@each $fs-name, $fs-value in $font-sizes {
+  .fs-#{$fs-name} {
+    font-size: $fs-value;
+  }
+}
+
+
+_helpers:
+
+.text-center {
+  text-align: center;
+}
+
+.flow > * + * {
+  margin-top: var(--flow-spacer, $space-base);
+
+  &[data-spacing="small"] {
+    --flow-spacer: $space-s;
+  }
+  &[data-spacing="medium"] {
+    --flow-spacer: $space-m;
+  }
+  &[data-spacing="large"] {
+    --flow-spacer: $space-l;
+  }
+}
+
+
+_index:
+
+@forward "./font-sizes";
+@forward "./helpers";
+
+and in the style.scss:
+
+@use "./base";
+@use "./abstracts";
+@use "./utilities";
+@use "./components";
+@use "./layout";
+@use "./pages/home";
+@use "./pages/about";
+@use "./pages/contact";
+
+
+And of course im using vite to build the project,
+in the vite.config.js i have:
+
+
+// Import necessary functions and plugins
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import htmlPurge from "vite-plugin-purgecss"; // Your plugin import
+
+// Export a single configuration object, processed by defineConfig
+export default defineConfig({
+  // Root directory where your source files are located (e.g., 'src')
+  root: resolve(__dirname, "src/"),
+
+  // Build options
+  build: {
+    outDir: "../dist", // Output directory for built files
+    emptyOutDir: true, // Clear the output directory before building
+    rollupOptions: {
+      input: {
+        // Entry points for your HTML files (Vite builds them as separate pages)
+        home: resolve(__dirname, "src/index.html"),
+        about: resolve(__dirname, "src/about/index.html"),
+        contact: resolve(__dirname, "src/contact/index.html"),
+      },
+    },
+  },
+
+  // ✨ THIS IS WHERE YOUR PLUGINS GO ✨
+  // The 'plugins' array is a property of the main Vite config object.
+  plugins: [
+    htmlPurge({
+      // You can add options for purgecss here if needed.
+      // For example, to tell it where to look for content:
+      content: [
+        resolve(__dirname, "src/**/*.html"), // Look in all HTML files
+        resolve(__dirname, "src/**/*.js"), // Look in JS files (if you have dynamic classes)
+      ],
+    }),
+  ],
+});

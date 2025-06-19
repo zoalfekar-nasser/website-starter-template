@@ -23,18 +23,18 @@
   }
 }
 
-@function getMapValue($map, $key, $name: "Value") {
-  @if map.has-key($map, $key) {
-    @return map.get($map, $key);
+@function getMapValue($name: "Value", $map, $key...) {
+  @if map.has-key($map, $key...) {
+    @return map.get($map, $key...);
   } @else {
     @error "This #{$name} '#{$key}' is not available  ";
   }
 }
 
-@function fs($font-size) {
-  @return getMapValue($font-sizes, $font-size, "font-size");
+@function fs($font-size...) {
+  @return getMapValue("font-size", $font-sizes, $font-size...);
 }
 
-@function space($space) {
-  @return getMapValue($spaces, $space, "space");
+@function space($space...) {
+  @return getMapValue("space", $spaces, $space...);
 }
