@@ -1,3 +1,5 @@
+@use "functions" as *;
+
 $font-sizes: (
   s: clamp(0.8889rem, 0.8667rem + 0.1111vw, 1rem),
   base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem),
@@ -7,6 +9,10 @@ $font-sizes: (
   xxl: clamp(1.6018rem, 1.4038rem + 0.9902vw, 2.592rem),
   xxxl: clamp(2.0736rem, 1.0961rem + 4.8873vw, 3.9609rem),
 );
+
+@function fs($font-size...) {
+  @return getMapValue("font-size", $font-sizes, $font-size...);
+}
 
 $ff-primary: "Lato", sans-serif;
 $ff-secondary: "Abril Fatface", serif;

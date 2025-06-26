@@ -2,8 +2,6 @@
 @use "sass:meta";
 @use "sass:math";
 @use "breakpoints" as *;
-@use "typography" as *;
-@use "spacing" as *;
 
 @function validate-breakpoint($breakpoint) {
   @if map.has-key($breakpoints, $breakpoint) {
@@ -31,10 +29,4 @@
   }
 }
 
-@function fs($font-size...) {
-  @return getMapValue("font-size", $font-sizes, $font-size...);
-}
 
-@function space($space...) {
-  @return getMapValue("space", $spaces, $space...);
-}
